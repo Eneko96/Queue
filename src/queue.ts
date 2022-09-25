@@ -2,10 +2,10 @@ export class Queue<T> {
   #top: number;
   #bottom: number;
   #elements: T[];
-  constructor() {
-    this.#elements = [];
+  constructor(params?: T[]) {
+    this.#elements = params || [];
     this.#top = 0;
-    this.#bottom = 0;
+    this.#bottom = params?.length || 0;
   }
 
   enqueue(value: T): void {
@@ -30,5 +30,11 @@ export class Queue<T> {
 
   get tail(): T {
     return this.#elements[this.#bottom - 1];
+  }
+
+  clear() {
+    this.#elements = [];
+    this.#top = 0;
+    this.#bottom = 0;
   }
 }
